@@ -1,24 +1,13 @@
-first_num = int(input())
-check_num = first_num
-sum_num = 0
+num = int(input())
+check = num
 new_num = 0
-cnt = 0
+temp = 0
+count = 0
 while True:
-    if first_num < 10:
-        first_num = 10*first_num
-        sum_num = (first_num // 10) + (first_num % 10)
-        new_num = 10*(first_num % 10) + (sum_num % 10)
-        first_num = new_num
-        cnt += 1
-        if first_num == check_num:
-            print(cnt)
-            break        
-    else:
-        sum_num = (first_num // 10) + (first_num % 10)
-        new_num = 10*(first_num % 10) + (sum_num % 10)
-        first_num = new_num
-        if first_num == check_num:
-            print(cnt)
-            break
-
-
+    temp = num//10 + num%10
+    new_num = (num%10)*10 + temp%10
+    count += 1
+    num = new_num
+    if new_num == check:
+        break
+print(count)
