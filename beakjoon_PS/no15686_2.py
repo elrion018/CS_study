@@ -3,7 +3,7 @@
 #programmer : 천재민
 #programming date : 2019-03-28
 #######################
-
+ans = 10e9
 #메인 메소드(조합, 경우의 수, 최단 치킨거리)
 def cal(idx, cnt):
     global ans #정답 변수 글로벌 변수 설정
@@ -12,12 +12,12 @@ def cal(idx, cnt):
 
     if cnt == M: #치킨거리 구하기.
         s = 0 #도시의 치킨거리
-        for i in c:
-            cx, cy = chicken[i]
-            d = 10e9 #치킨집과 집간 치킨거리
-            for j in home:
-                hx, hy = j
-                d = min(d,abs(cx-hx) + abs(cy-hy))
+        for i in home:
+            hx, hy = i
+            d = 10e9
+            for j in c:
+                cx, cy = chicken[j]
+                d = min(d, abs(cx-hx) + abs(cy-hy))
             s += d
         ans = min(ans, s)
         return
