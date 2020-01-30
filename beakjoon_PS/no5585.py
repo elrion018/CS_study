@@ -1,0 +1,27 @@
+money = 1000 - int(input())
+count = 0
+if money >= 500:
+    temp = money // 500
+    money -= 500 * temp
+    count += temp
+if money >= 100:
+    temp = money // 100
+    money -= 100 * temp
+    count += temp
+if money >= 50:
+    temp = money // 50
+    money -= 50 * temp
+    count += temp
+if money >= 10:
+    temp = money // 10
+    money -= 10 * temp
+    count += temp
+if money >= 5:
+    temp = money // 5
+    money -= 5 * temp
+    count += temp
+if money >= 1:
+    temp = money // 1
+    money -= 1 * temp
+    count += temp
+print(count)
