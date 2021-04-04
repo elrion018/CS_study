@@ -1,39 +1,52 @@
 import sys
 import collections
-result = None
-count = 0
+
+def cal(i, x):
+  if i == 0:
+    return x - 1
+
+  elif i == 1:
+    return x + 1
+  
+  elif i == 2:
+    return 2 * x
 
 
-def bfs(N, K):
-    global result, count
-    visited = [0] * 100001
-    queue = collections.deque()
-    queue.append(N)
-    visited[N] = 1
+def bfs(start, destination):
+  if start == destination:
+    return [0, 1]
 
-    while queue:
-        X = queue.popleft()
-        if X == K:
-            if result is None:
-                result = visited[K] - 1
-                count += 1
-            else:
-                if result == visited[K]-1:
-                    visited[K] = 0
-                    count += 1
+  visited = [100000] * (2*max(start, destination)+1)
+  q = collections.deque()
+  min_time = sys.maxsize
+  count = 0
 
-        if X*2 >= 0 and X*2 < 100001 and (visited[X*2] == 0 or X*2 == K):
-            visited[X*2] = visited[X] + 1
-            queue.append(X*2)
-        if X - 1 >= 0 and X - 1 < 100001 and (visited[X-1] == 0 or X-1 == K):
-            visited[X-1] = visited[X] + 1
-            queue.append(X-1)
-        if X + 1 >= 0 and X + 1 < 100001 and (visited[X+1] == 0 or X+1 == K):
-            visited[X+1] = visited[X] + 1
-            queue.append(X+1)
+  visited[start] = 0
+  q.append(start)
 
+  while q:
+    x = q.popleft()
 
-N, K = map(int, sys.stdin.readline().split())
-bfs(N, K)
-print(result)
-print(count)
+    for i in range(3):
+      ax = cal(i, x)
+
+      if ax >= 0 and ax < 2*max(start, destination)+1 and visited[ax] >= visited[x] + 1:
+        visited[ax] = visited[x] + 1
+        q.append(ax)
+
+        if ax == destination:
+          if min_time == visited[ax]:
+            count += 1
+          
+          elif min_time > visited[ax]:
+            min_time = visited[ax]
+            count = 1
+
+  return [min_time, count]
+
+n, k = map(int, sys.stdin.readline().split())
+
+ans = bfs(n,k)
+
+print(ans[0])
+print(ans[1])
